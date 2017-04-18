@@ -1,0 +1,7 @@
+
+PROGFILES := D:/MySoftware/gcc-arm-none-eabi-5_4-2016q3-20160926-win32
+
+GNU_INSTALL_ROOT := $(PROGFILES)
+GNU_VERSION := 5.4.1
+GNU_PREFIX := arm-none-eabi
+
