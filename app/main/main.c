@@ -171,9 +171,9 @@ int main(void)
     (void) NRF_LOG_INIT(NULL);
     timers_init();
     scheduler_init();
-	nrf_clock_lf_cfg_t clock_lf_cfg = NRF_CLOCK_LFCLKSRC;
-    SOFTDEVICE_HANDLER_INIT(&clock_lf_cfg, NULL);
-    //ble_init();
+	//nrf_clock_lf_cfg_t clock_lf_cfg = NRF_CLOCK_LFCLKSRC;
+    //SOFTDEVICE_HANDLER_INIT(&clock_lf_cfg, NULL);
+    ble_init();
     //buttons_leds_init(&erase_bonds);
     system_clock_init();
     wdt_init(); 
