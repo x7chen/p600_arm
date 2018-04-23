@@ -27,6 +27,7 @@ SRC_FILES += \
   $(PROJ_DIR)/utils/square_root.c \
   $(SDK_ROOT)/bsp/bsp.c \
   $(SDK_ROOT)/bsp/bsp_btn_ble.c \
+  $(SDK_ROOT)/drivers/ak8963/ak8963_spi.c \
   $(SDK_ROOT)/components/ble/ble_advertising/ble_advertising.c \
   $(SDK_ROOT)/components/ble/ble_db_discovery/ble_db_discovery.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_dis/ble_dis.c \
@@ -94,6 +95,7 @@ INC_FOLDERS += \
   $(PROJ_DIR)/components/common \
   $(PROJ_DIR)/components/ble/ble_services/ble_nus \
   $(PROJ_DIR)/components/libraries/pwm \
+  $(SDK_ROOT)/drivers/ak8963 \
   $(SDK_ROOT)/components \
   $(SDK_ROOT)/components/ble/ble_advertising \
   $(SDK_ROOT)/components/ble/ble_dtm \

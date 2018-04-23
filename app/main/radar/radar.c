@@ -30,7 +30,7 @@
                                 if(ON==1) \
                                 {nrf_gpio_pin_set(RADAR_PWR_PIN);}\
                                 else \
-                                {nrf_gpio_pin_set(RADAR_PWR_PIN);}}while(0)
+                                {nrf_gpio_pin_clear(RADAR_PWR_PIN);}}while(0)
 
 APP_TIMER_DEF(m_range_meas_timer_id);
 APP_PWM_INSTANCE(PWM1,2); 

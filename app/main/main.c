@@ -18,6 +18,7 @@
 #include "bsp_btn_ble.h"
 #include "radar.h"
 #include "led.h"
+#include "ak8963.h"
 
 
 #define NRF_LOG_MODULE_NAME "APP"
@@ -30,7 +31,14 @@
 #define SCHED_QUEUE_SIZE                32                               /**< Maximum number of events in the scheduler queue. */
 
 
+#define NB_RESET_PIN                      24
 
+#define NB_RESET(ON)     do{\
+                                nrf_gpio_cfg_output(NB_RESET_PIN);\
+                                if(ON==1) \
+                                {nrf_gpio_pin_set(NB_RESET_PIN);}\
+                                else \
+                                {nrf_gpio_pin_clear(NB_RESET_PIN);}}while(0)
                                     
                               
 
@@ -51,6 +59,7 @@ void radar_meas_complete(uint8_t * result, uint16_t length)
 }
 void second_handler(uint32_t second)
 {
+    uint8_t dummy[6];
     wdt_feed();
     if(second%3==2)
     {
@@ -61,14 +70,16 @@ void second_handler(uint32_t second)
     // if(second<5) return;
     if(second%2==0)
     {
-        LED1(1);
+        //LED1(1);
         range_measure(RANGE_MEAS_MODE_MEAS);
+        ak8963_single_measure(dummy);
+        //NRF_LOG_INFO("mag:%6d:%6d:%6d\r\n",(uint16_t)dummy[0]*256+dummy[1],(uint16_t)dummy[2]*256+dummy[3],(uint16_t)dummy[4]*256+dummy[5]); 
         //pwm_on();
         //radar_send();
     }
     else
     {
-        LED1(0);
+        //LED1(0);
         //pwm_off();
 
 
@@ -179,13 +190,15 @@ int main(void)
     wdt_init(); 
     wdt_start();
     register_clock_event();
-    //communicateInit();
+    communicateInit();
     //pwm_on();
     
     NRF_LOG_INFO("Hello\r\n");  
     
     meas_callbacks.on_meas_complete = (meas_callback_t)radar_meas_complete;
     register_range_meas_callbacks(&meas_callbacks);
+    
+    NB_RESET(1);
     
     for (;;)
     {
